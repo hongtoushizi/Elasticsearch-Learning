@@ -1,0 +1,68 @@
+GET _search
+{
+  "query": {
+    "match_all": {}
+  }
+}
+
+# Check health of elastic search cluster.
+GET _cat/health?v
+
+# Get details of all nodes in a cluster.
+GET _cat/nodes?v
+
+# Create an index 
+PUT /customer?pretty
+
+# Show all indices
+GET _cat/indices?v
+
+# Create a document in an index
+PUT /customer/external/1?pretty
+{
+  "name" : "Jon Doe"
+}
+
+# Get a document in a index by id
+GET /customer/external/1?pretty
+
+# Creating a temporary index
+PUT /temp?pretty
+
+# Creating a document
+PUT /temp/tempdoc/1?pretty
+{
+  "name" : "This a temporary doc"
+}
+
+# Getting a document
+GET /temp/tempdoc/1?pretty
+
+#Deleting a document 
+DELETE /temp/tempdoc/1
+
+#Deleting a index
+DELETE  /temp?pretty
+
+#Creating a document without specifying id
+POST /customer/external/
+{
+  "name": "Jane Toe"
+}
+
+
+#Updating a document by id
+POST /customer/external/1/_update?pretty
+{
+  "doc": {"name" : "Jhon Doe"}
+}
+
+#Updating a document by id and adding a new field
+POST /customer/external/1/_update?pretty
+{
+  "doc": {
+          "name" : "Jhon Doe",
+          "age" : 15 
+  }
+}
+
