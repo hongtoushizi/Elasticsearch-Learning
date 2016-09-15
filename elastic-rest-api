@@ -66,3 +66,16 @@ POST /customer/external/1/_update?pretty
   }
 }
 
+# Creating indices in bulk
+POST customer/external/_bulk?pretty
+{"index" : {"_id" : "1"}}
+{"name" : "Jhon Doe" }
+{"index" : {"_id": "2"}}
+{"name": "Jane Doe"}
+
+# Bulk update and delete action
+POST customer/external/_bulk?pretty
+{"update" : {"_id" : "1" } }
+{"doc" : {"name" : "John Doe becomes Jane Doe"}}
+{"delete": {"_id" : "2"}}
+
