@@ -1,0 +1,82 @@
+#Search API
+
+#Search parameters in request URI
+GET /bank/_search?q=*&pretty
+
+# Search parameters in request body
+GET /bank/_search?pretty
+{
+  "query" : { "match_all" : { } }
+}
+# "match_all" for matching all documents in an index.
+
+# Limit the size of search result
+GET /bank/_search?pretty
+{
+  "query": {"match_all": {}},
+  "size": 1
+}
+
+# Slicing the search result
+GET /bank/_search?pretty
+{
+  "query": {"match_all": {}},
+  "from" : 10,
+  "size" : 20
+}
+
+#Sorting the result based on some values
+GET bank/_search?pretty
+{
+  "query": {"match_all": {}},
+  "sort": [
+    {
+      "balance": {
+        "order": "desc"
+      }
+    }
+  ]
+}
+
+#Restricting the fields in search result.
+GET bank/_search?pretty
+{
+  "query": {"match_all": {}},
+  "_source": ["account_number", "balance"]
+}
+
+#Match query for matching on specific fields
+GET bank/_search?pretty
+{
+  "query": {"match": {
+    "account_number": "20"
+    }
+  }
+}
+
+#Returns all accounts with "mill" in address
+GET bank/_search?pretty
+{
+  "query": { "match": {
+    "address": "mill"
+    }
+  }
+}
+
+#Returns all account with "mill" or "lane" in address
+GET bank/_search?pretty
+{
+  "query": { "match": {
+    "address": "mill lane"
+    }
+  }
+}
+
+#Returns all account containing phrase "mill lane" in address
+GET bank/_search?pretty
+{
+  "query": {"match_phrase": {
+    "address": "mill lane"
+    }
+  }
+}
